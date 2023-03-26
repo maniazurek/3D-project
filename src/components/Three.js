@@ -7,6 +7,7 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { angleToRadians } from "../utils/angleToRadians";
 import * as THREE from "three";
+import gsap from "gsap";
 
 const Three = () => {
   const orbitControlsRef = useRef(null);
@@ -19,29 +20,55 @@ const Three = () => {
     }
   });
 
+  const ballRef = useRef(null);
   useEffect(() => {
-    if (!!orbitControlsRef.current) {
+    if (!!ballRef.current) {
+      console.log(ballRef.current.position);
+
+      const timeline = gsap.timeline({ paused: true });
+
+      timeline.to(ballRef.current.position, {
+        x: 1,
+        duration: 2,
+        ease: "power2.out",
+      });
+
+      timeline.to(
+        ballRef.current.position,
+        {
+          y: 0.5,
+          duration: 1.5,
+          ease: "bounce.out",
+        },
+        "<"
+      );
+
+      timeline.play();
     }
-  }, [orbitControlsRef]);
+  }, [ballRef.current]);
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 1, 5]} />
+      <PerspectiveCamera makeDefault position={[0, 10, 5]} />
       <OrbitControls
         ref={orbitControlsRef}
         minPolarAngle={angleToRadians(60)}
         maxPolarAngle={angleToRadians(80)}
       />
-      <mesh position={[0, 0.5, 0]} castShadow>
+      <mesh position={[-2, 2.5, 0]} castShadow ref={ballRef}>
         <sphereGeometry args={[0.5, 32, 32]} />
-        <meshStandardMaterial color="#fff" metalness={0.6} roughness={0.6}/>
+        <meshStandardMaterial color="#fff" metalness={0.6} roughness={0.6} />
       </mesh>
       <mesh rotation={[-angleToRadians(90), 0, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
         <meshStandardMaterial color="#1ea3d8" />
       </mesh>
       <ambientLight args={["#fff", 0.25]} />
-      <spotLight args={["#fff", 1.5, 7, angleToRadians(45), 0.4]} position={[-3, 1, 0]} castShadow/>
+      <spotLight
+        args={["#fff", 1.5, 7, angleToRadians(45), 0.4]}
+        position={[-3, 1, 0]}
+        castShadow
+      />
       <Environment background>
         <mesh>
           <sphereGeometry args={[50, 100, 100]} />
