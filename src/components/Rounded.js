@@ -5,16 +5,17 @@ import { OrbitControls } from "@react-three/drei";
 import InstancedSpheres from "./InstancedSpheres";
 import Borders from "./Borders";
 import Mouse from "./Mouse";
+import Ball from "./Ball";
 
 const Rounded = () => {
   return (
     <Canvas
       id="canvas-container"
       shadows
-    //   gl={{ stencil: false, antialias: false }}
+      //   gl={{ stencil: false, antialias: false }}
       camera={{ position: [0, 0, 20], fov: 50, near: 17, far: 40 }}
     >
-      <fog attach="fog" args={["#a2f14a", 25, 35]} />
+      {/* <fog attach="fog" args={["#a2f14a", 25, 35]} /> */}
       <color attach="background" args={["t"]} />
       <ambientLight intensity={1.5} />
       <directionalLight position={[-10, -10, -5]} intensity={0.5} />
@@ -31,12 +32,19 @@ const Rounded = () => {
       <Suspense fallback={null}>
         <Physics
           gravity={[0, -50, 0]}
-          defaultContactMaterial={{ restitution: 0.5 }}
+          defaultContactMaterial={{ restitution: 0.9 }}
         >
-          <group position={[0, 0, -10]}>
-            <InstancedSpheres />
+          <group position={[0, 0, -100]}>
+            {/* <InstancedSpheres /> */}
+            {Array(100)
+              .fill()
+              .map((ball) => {
+                return (
+                  <Ball position={[0, 0, 0]} color={Math.random() * 0xffff} />
+                );
+              })}
+
             <Borders />
-            <Mouse />
           </group>
         </Physics>
       </Suspense>

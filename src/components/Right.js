@@ -1,9 +1,9 @@
 import { usePlane } from "@react-three/cannon";
 
-const Ground = () => {
+const Right = () => {
   const [ref] = usePlane(() => ({
-    rotation: [-Math.PI / 360, 0, 0],
-    position: [0, 40, 40],
+    rotation: [Math.PI / 2, -Math.PI / 2, 0],
+    position: [40, 40, 0],
   }));
   return (
     <mesh ref={ref} castShadow receiveShadow>
@@ -13,4 +13,4 @@ const Ground = () => {
   );
 };
 
-export default Ground;
+export default Right;

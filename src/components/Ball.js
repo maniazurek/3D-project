@@ -4,9 +4,17 @@ import { angleToRadians } from "../utils/angleToRadians";
 
 const Ball = ({ position, color }) => {
   const [ref] = useSphere(() => ({
-    mass: 100,
-    position: [Math.random() * 10, Math.random() * 10, Math.random() * 10],
+    mass: 10,
+    position: [Math.random() *1000, Math.random() * 100, 0],
   }));
+
+  // const { viewport } = useThree();
+  // const [ref] = useSphere((index) => ({
+  //   mass: 100,
+  //   position: [4 - Math.random() * 8, viewport.height, 0, 0],
+  //   args: [1.2],
+  // }));
+  
   return (
     <>
       <Physics>
