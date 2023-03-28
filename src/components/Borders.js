@@ -26,7 +26,7 @@ const Borders = () => {
         color="#fff"
       />
       <Plane position={[0, 0, 1]} rotation={[0, 0, 0]} color="#000" />
-      {/* <Plane position={[0, 0, 12]} rotation={[0, -Math.PI, 0]} color="#fff" /> */}
+      <Plane position={[0, 0, 12]} rotation={[0, -Math.PI, 0]} color="#fff" />
     </>
   );
 };
