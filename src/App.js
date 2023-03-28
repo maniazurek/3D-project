@@ -17,6 +17,7 @@ import Ground from "./components/Ground";
 import Back2 from "./components/Back2";
 import Box from "./components/Box";
 import Boxes from "./components/Boxes";
+import Falling from "./components/Falling";
 
 const App = () => {
   return (
@@ -65,8 +66,10 @@ const App = () => {
     //     </mesh>
     //   </Environment>
     // </Canvas>
-    <Rounded />
+    // <Rounded />
     // <Boxes />
+
+    <Falling />
   );
 };
 
