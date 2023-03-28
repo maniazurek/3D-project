@@ -8,6 +8,7 @@ import { useEffect, useRef } from "react";
 import { angleToRadians } from "../utils/angleToRadians";
 import * as THREE from "three";
 import gsap from "gsap";
+import { Physics, useSphere, useBox } from "@react-three/cannon";
 
 const Three = () => {
   const orbitControlsRef = useRef(null);
