@@ -99,7 +99,7 @@ function Back(props) {
   return (
     <mesh ref={ref}>
       <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"grey"}  />
+      <meshStandardMaterial color={"grey"} />
     </mesh>
   );
 }
@@ -116,7 +116,7 @@ function Front(props) {
   return (
     <mesh ref={ref}>
       <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"brown"} transparent={true} opacity={0.5}/>
+      <meshStandardMaterial color={"brown"} transparent={true} opacity={0.5} />
     </mesh>
   );
 }
@@ -141,35 +141,32 @@ export default function App() {
   const [balls, setBalls] = useState([]);
   const colors = ["#173f5f", "#20639b", "#ff4f79", "#C44536", "#ed553b"];
 
+
   return (
     <>
-      <Canvas
-        onClick={(e) => onCanvasClicked(e)}
-        id="canvas-container"
-      
-      >
+      <Canvas id="canvas-container" camera={{ position: [10, 10, 50] }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
         <Physics
-          gravity={[0, -26, 0]}
-          defaultContactMaterial={{ restitution: 1.1 }}
+          gravity={[0, 0, 0]}
+          defaultContactMaterial={{ restitution: 1 }}
         >
           {/* {balls.map((props) => (
           <Ball {...props} />
         ))} */}
-          {Array(100)
+          {Array(50)
             .fill()
             .map((ball) => {
               return <Ball />;
             })}
-          {/* <Bottom />
+          <Bottom />
           <Right />
           <Left />
           <Top />
           <Back />
-          <Front /> */}
-          <Borders/>
+          <Front />
+          {/* <Borders /> */}
           {/* <Circle/> */}
         </Physics>
         <OrbitControls />

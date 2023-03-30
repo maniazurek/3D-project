@@ -11,7 +11,7 @@ const Ball = ({ position, color }) => {
   const [ref] = useSphere(() => ({
     args: [0.2],
     mass: 1,
-    position: [Math.random() * 10, 0, 0],
+    position: [Math.random(), Math.random(), 0],
   }));
 
   // function Ball(props) {
