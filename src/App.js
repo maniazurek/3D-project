@@ -3,21 +3,13 @@ import { Environment, OrbitControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Ball from "./components/Ball";
-import Container from "./components/Container";
-import Back from "./components/Back";
+import Container from "./components/Edges";
 import Three from "./components/Three";
 import { angleToRadians } from "./utils/angleToRadians";
 import * as THREE from "three";
-import Borders from "./components/Borders";
-import Rounded from "./components/Rounded";
-import Top from "./components/Top";
-import Left from "./components/Left";
-import Right from "./components/Right";
-import Ground from "./components/Ground";
-import Back2 from "./components/Back2";
-import Box from "./components/Box";
-import Boxes from "./components/Boxes";
 import Falling from "./components/Falling";
+
+import Project from "./components/Project";
 
 const App = () => {
   return (
@@ -68,8 +60,10 @@ const App = () => {
     // </Canvas>
     // <Rounded />
     // <Boxes />
-
-    <Falling />
+    <>
+      <Falling />
+      {/* <Project /> */}
+    </>
   );
 };
 

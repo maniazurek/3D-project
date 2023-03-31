@@ -6,38 +6,28 @@ import Ball from "./Ball";
 import { TorusGeometry } from "three";
 import { angleToRadians } from "../utils/angleToRadians";
 import Borders from "./Borders";
+import Bottom from "./Bottom";
+import Edges from "./Edges";
 
-// function Ball(props) {
-//   const { args = [0.2, 32, 32], color } = props;
-//   const [ref] = useSphere(() => ({ args: [0.2], mass: 1 }));
+// function Bottom(props) {
+//   const { args = [20, 10, 1] } = props;
+//   const [ref, api] = useBox(() => ({ args }));
+
+//   useFrame(() => {
+//     api.position.set(0, -10, 0);
+//     api.rotation.set(angleToRadians(90), 0, 0);
+//   });
 
 //   return (
 //     <mesh ref={ref}>
-//       <sphereBufferGeometry args={args} />
-//       <meshStandardMaterial color={color} />
+//       <boxBufferGeometry args={args} />
+//       <meshStandardMaterial color={"yellow"} />
 //     </mesh>
 //   );
 // }
 
-function Bottom(props) {
-  const { args = [20, 10, 1] } = props;
-  const [ref, api] = useBox(() => ({ args }));
-
-  useFrame(() => {
-    api.position.set(0, -10, 0);
-    api.rotation.set(angleToRadians(90), 0, 0);
-  });
-
-  return (
-    <mesh ref={ref}>
-      <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"yellow"} />
-    </mesh>
-  );
-}
-
 function Right(props) {
-  const { args = [20, 2, 1] } = props;
+  const { args = [20, 1, 1] } = props;
   const [ref, api] = useBox(() => ({ args }));
 
   useFrame(() => {
@@ -47,14 +37,14 @@ function Right(props) {
 
   return (
     <mesh ref={ref}>
-      <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"red"} />
+      <planeGeometry args={args} />
+      <meshStandardMaterial color={"#fff"} transparent={true} opacity={0} />
     </mesh>
   );
 }
 
 function Left(props) {
-  const { args = [20, 2, 1] } = props;
+  const { args = [20, 1, 1] } = props;
   const [ref, api] = useBox(() => ({ args }));
 
   useFrame(() => {
@@ -64,14 +54,14 @@ function Left(props) {
 
   return (
     <mesh ref={ref}>
-      <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"blue"} />
+      <planeGeometry args={args} />
+      <meshStandardMaterial color={"#fff"} transparent={true} opacity={0} />
     </mesh>
   );
 }
 
 function Top(props) {
-  const { args = [20, 2, 1] } = props;
+  const { args = [20, 1, 1] } = props;
   const [ref, api] = useBox(() => ({ args }));
 
   useFrame(() => {
@@ -81,8 +71,8 @@ function Top(props) {
 
   return (
     <mesh ref={ref}>
-      <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"pink"} />
+      <planeGeometry args={args} />
+      <meshStandardMaterial color={"#fff"} />
     </mesh>
   );
 }
@@ -98,8 +88,8 @@ function Back(props) {
 
   return (
     <mesh ref={ref}>
-      <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"grey"} />
+      <planeGeometry args={args} />
+      <meshStandardMaterial color={"#fff"} transparent={true} opacity={0} />
     </mesh>
   );
 }
@@ -115,14 +105,14 @@ function Front(props) {
 
   return (
     <mesh ref={ref}>
-      <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={"brown"} transparent={true} opacity={0.5} />
+      <planeGeometry args={args} />
+      <meshStandardMaterial color={"#fff"} transparent={true} opacity={0} />
     </mesh>
   );
 }
 
-const Circle = (props) => {
-  const { args = [20, 0.1, 5, 100] } = props;
+function Circle(props) {
+  const { args = [15, 1, 5, 100] } = props;
   const [ref, api] = useBox(() => ({ args }));
 
   useFrame(() => {
@@ -135,27 +125,20 @@ const Circle = (props) => {
       <meshStandardMaterial />
     </mesh>
   );
-};
+}
 
 export default function App() {
-  const [balls, setBalls] = useState([]);
-  const colors = ["#173f5f", "#20639b", "#ff4f79", "#C44536", "#ed553b"];
-
-
   return (
     <>
-      <Canvas id="canvas-container" camera={{ position: [10, 10, 50] }}>
+      <Canvas id="canvas-container" camera={{ position: [0, 0, 15] }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
         <Physics
           gravity={[0, 0, 0]}
-          defaultContactMaterial={{ restitution: 1 }}
+          defaultContactMaterial={{ restitution: 0.99 }}
         >
-          {/* {balls.map((props) => (
-          <Ball {...props} />
-        ))} */}
-          {Array(50)
+          {Array(30)
             .fill()
             .map((ball) => {
               return <Ball />;
@@ -166,22 +149,11 @@ export default function App() {
           <Top />
           <Back />
           <Front />
-          {/* <Borders /> */}
-          {/* <Circle/> */}
+          {/* <Edges /> */}
+          {/* <Circle /> */}
         </Physics>
         <OrbitControls />
       </Canvas>
     </>
   );
-
-  function onCanvasClicked(e) {
-    let newBalls = [...balls];
-    const color = colors[getRandomInt(6)];
-    newBalls.push({ color: color });
-    setBalls([...newBalls]);
-  }
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
 }

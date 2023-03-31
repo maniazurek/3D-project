@@ -35,18 +35,16 @@ const Ball = ({ position, color }) => {
 
   return (
     <>
-      <Physics>
-        <mesh ref={ref}>
-          <sphereGeometry args={[0.2, 32, 32]} />
-          <meshStandardMaterial
-            color={Math.random() * 0xffff}
-            roughness={0.8}
-            metalness={0.2}
-            clearcoat={1}
-            clearcoatRoughness={0.35}
-          />
-        </mesh>
-      </Physics>
+      <mesh ref={ref}>
+        <sphereGeometry args={[0.2, 32, 32]} />
+        <meshStandardMaterial
+          color={Math.random() * 0xffff}
+          roughness={0.8}
+          metalness={0.2}
+          clearcoat={1}
+          clearcoatRoughness={0.35}
+        />
+      </mesh>
     </>
   );
 };
