@@ -11,10 +11,7 @@ const Ball = () => {
     <>
       <mesh ref={ref}>
         <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial
-          color={Math.random() * 0x16777215}
-          roughness={0.5}
-        />
+        <meshStandardMaterial color={Math.random() * 0x16777215} />
       </mesh>
     </>
   );
