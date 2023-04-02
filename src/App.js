@@ -12,8 +12,8 @@ const App = () => {
       <Canvas id="canvas-container" camera={{ position: [0, 0, 15] }}>
         <ambientLight intensity={0.5} />
         <Physics
-          gravity={[0, -1, 0]}
-          defaultContactMaterial={{ restitution: 1 }}
+          gravity={[0, 0, 0]}
+          defaultContactMaterial={{ restitution: 0.9 }}
         >
           {Array(50)
             .fill()
